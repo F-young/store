@@ -1,0 +1,30 @@
+from selenium import webdriver
+import time
+from selenium.webdriver import ActionChains
+dr = webdriver.Chrome()
+dr.get("http://www.jd.com")
+ele = dr.find_element_by_link_text("我的京东")
+ac = ActionChains(dr)
+ac.move_to_element(ele).perform()
+time.sleep(6)
+dr.find_element_by_link_text("你好，请登录").click()
+time.sleep(6)
+dr.find_element_by_xpath("//*[@id='content']/div[2]/div[1]/div/div[3]/a").click()
+time.sleep(2)
+dr.find_element_by_xpath("//*[@id='loginname']").send_keys("15732851673")
+dr.find_element_by_xpath("//*[@id='nloginpwd']").send_keys("yang5121")
+dr.find_element_by_xpath("//*[@id='loginsubmit']").click()
+time.sleep(30)
+dr.find_element_by_link_text("电脑").click()
+time.sleep(5)
+winb = dr.window_handles
+print(winb)
+time.sleep(10)
+dr.switch_to.window(winb[1])
+dr.find_element_by_link_text("游戏本").click()
+wina = dr.window_handles
+dr.switch_to.window(wina[2])
+time.sleep(6)
+dr.find_element_by_xpath("//*[@id='J_goodsList']/ul/li[4]/div/div[7]/a[3]").click()
+time.sleep(20)
+dr.quit()
